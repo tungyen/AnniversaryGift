@@ -112,3 +112,26 @@ button:hover{
     transform:scale(1.08);
 
 }
+
+#heart-progress{
+
+
+    position:fixed;
+
+
+    top:30px;
+
+
+    right:40px;
+
+
+    font-size:40px;
+
+
+    color:#ff8fab;
+
+
+    z-index:100;
+
+
+}
