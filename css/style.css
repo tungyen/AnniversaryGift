@@ -39,10 +39,6 @@ body{
     0 15px 40px rgba(0,0,0,.1);
 }
 
-.heart{
-    font-size:80px;
-}
-
 h1{
     margin-top:20px;
 }
@@ -51,34 +47,75 @@ p{
     margin-top:15px;
 }
 
+.hero-heart{
+    font-size:80px;
+    animation:
+    floatHeart 2s ease-in-out infinite;
+}
+
+.hero-heart-wrapper{
+    display:flex;
+    justify-content:center;
+}
+
+@keyframes floatHeart{
+    0%,100%{
+        transform:
+        translateY(0);
+    }
+
+    50%{
+        transform:
+        translateY(-10px);
+    }
+}
+
 button{
+    border:none;
+    cursor:pointer;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.primary-button{
     margin-top:40px;
     padding:
         15px
-        40px;
+        45px;
 
-    border:none;
     border-radius:999px;
-    background:#FF8FAB;
+    background:#ff8fab;
     color:white;
     font-size:18px;
-    cursor:pointer;
-    transition:.3s;
+    font-weight:600;
+    box-shadow:
+    0 10px 25px rgba(255,107,129,.25);
 }
 
-button:hover{
-    transform:scale(1.08);
+
+.primary-button:hover{
+    transform:
+    translateY(-4px);
+    box-shadow:
+    0 15px 35px rgba(255,107,129,.35);
+}
+
+
+.primary-button:active{
+    transform:
+    scale(.96);
 }
 
 #heart-progress{
     position:fixed;
     top:30px;
     right:40px;
-    font-size:40px;
+    display:flex;
+    gap:8px;
+    font-size:28px;
     color:#ff8fab;
     z-index:100;
-
-
 }
 
 /* =========================
@@ -142,16 +179,11 @@ button:hover{
 #modal-button {
     width:100%;
     padding:14px;
-    border:none;
     border-radius:16px;
     background:#ff6b81;
     color:white;
     font-size:16px;
     font-weight:600;
-    cursor:pointer;
-    transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
 }
 
 #modal-button:hover {
@@ -192,5 +224,149 @@ button:hover{
         transform:
             scale(1)
             translateY(0);
+    }
+}
+
+.question-card{
+    transition:
+    opacity .3s ease,
+    transform .3s ease;
+}
+
+.question-card.fade-out{
+    opacity:0;
+    transform:
+    translateY(20px);
+}
+
+.question-header{
+    font-size:18px;
+    color:#ff6b81;
+    margin-bottom:20px;
+}
+
+#question-title{
+    font-size:24px;
+    line-height:1.5;
+    margin-bottom:28px;
+}
+
+#options-container{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+#options-container button{
+    padding:16px;
+    border-radius:18px;
+    background:#fff0f3;
+    color:#444;
+    font-size:16px;
+    font-weight:600;
+}
+
+#options-container button:hover{
+    transform:translateY(-3px);
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.1);
+}
+
+#options-container button:active{
+    transform:scale(.96);
+}
+
+#options-container button.correct{
+    background:#ff6b81;
+    color:white;
+    transform:scale(1.08);
+    box-shadow:
+    0 10px 25px rgba(255,107,129,0.35);
+}
+
+#options-container button.wrong{
+    animation: shake 0.3s;
+}
+
+@keyframes shake{
+    0%,100%{
+        transform:translateX(0);
+    }
+
+    25%{
+        transform:translateX(-8px);
+    }
+
+    75%{
+        transform:translateX(8px);
+    }
+}
+
+.heart{
+    display:inline-block;
+    transition:
+        transform .2s ease;
+}
+
+.heart.filled{
+    color:#ff6b81;
+}
+
+.heart-pop{
+    animation:
+    heartPop .35s ease;
+}
+
+@keyframes heartPop{
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.4);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* =====================
+   Home Animation
+===================== */
+
+.fade-item{
+    opacity:0;
+    animation:
+    fadeUp .8s ease forwards;
+}
+
+.hero-heart.fade-item{
+    animation-delay:.1s;
+}
+
+h1.fade-item{
+    animation-delay:.3s;
+}
+
+p.fade-item{
+    animation-delay:.5s;
+}
+
+.primary-button.fade-item{
+    animation-delay:.7s;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:
+        translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+        translateY(0);
     }
 }

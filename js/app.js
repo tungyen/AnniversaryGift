@@ -1,14 +1,8 @@
-import {SceneManager}
-from "./sceneManager.js";
-
-import {QuestionManager}
-from "./questionManager.js";
-
-import {HeartManager}
-from "./heartManager.js";
-
-import {AnimationManager}
-from "./animationManager.js";
+import {SceneManager} from "./sceneManager.js";
+import {QuestionManager} from "./questionManager.js";
+import {HeartManager} from "./heartManager.js";
+import {AnimationManager} from "./animationManager.js";
+import { QuestionUI } from "./questionUI.js";
 
 const ui={
 
@@ -30,6 +24,9 @@ questionTitle:
 optionsContainer:
     document.getElementById("options-container"),
 
+questionNumber:
+    document.getElementById("question-number"),
+
 startButton:
     document.getElementById("start-button"),
 
@@ -41,7 +38,8 @@ heartProgress:
 const sceneManager = new SceneManager(ui);
 const heartManager = new HeartManager(ui);
 const animationManager = new AnimationManager();
-const questionManager = new QuestionManager(ui, heartManager, animationManager);
+const questionUI = new QuestionUI(ui);
+const questionManager = new QuestionManager(questionUI, heartManager, animationManager);
 
 ui.startButton.addEventListener(
     "click",

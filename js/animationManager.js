@@ -5,11 +5,10 @@ export class AnimationManager{
     }
 
     correct(button){
-        console.log("correct", button.textContent);
+        button.classList.add("correct");
     }
 
     wrong(button){
-        console.log("wrong", button.textContent);
-
+        button.classList.add("wrong");
     }
 }
