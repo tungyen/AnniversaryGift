@@ -1,4 +1,5 @@
 import {questions} from "./questions.js";
+import {showModal} from "./modalManager.js";
 
 
 export class QuestionManager{
@@ -45,7 +46,12 @@ export class QuestionManager{
             this.next();
         }
         else{
-            this.animationManager.wrong(button)
+            showModal({
+                emoji:"🥺",
+                title:"妳真的確定嗎？",
+                message:"再想想看嘛 ❤️",
+                buttonText:"再看看"
+            });
         }
     }
 
