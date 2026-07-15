@@ -2,8 +2,15 @@ import {questions} from "./questions.js";
 
 
 export class QuestionManager{
-    constructor(ui){
+    constructor(
+        ui,
+        heartManager,
+        animationManager
+    )
+    {
         this.ui = ui;
+        this.heartManager = heartManager;
+        this.animationManager = animationManager;
         this.currentIndex = 0;
     }
 
@@ -13,55 +20,39 @@ export class QuestionManager{
     }
 
     render(){
-        const question =
-        questions[this.currentIndex];
+        const question = questions[this.currentIndex];
 
-        this.ui.questionTitle.textContent =
-        question.question;
+        this.ui.questionTitle.textContent = question.question;
         this.ui.optionsContainer.innerHTML="";
 
         question.options.forEach(
             (option,index)=>{
-                const button =
-                document.createElement("button");
+                const button = document.createElement("button");
 
-                button.textContent =
-                option;
-
-                button.addEventListener(
-                    "click",
-                    ()=>{
-
-                        this.checkAnswer(index);
-
-                    }
-                );
+                button.textContent = option;
+                button.onclick=()=>this.checkAnswer(index, button);
                 this.ui.optionsContainer.appendChild(button);
             }
         );
     }
 
-    checkAnswer(index){
-        const question =
-        questions[this.currentIndex];
+    checkAnswer(index, button){
+        const question = questions[this.currentIndex];
 
         if(index === question.answer){
-            alert("答對 ❤️");
+            this.animationManager.correct(button);
+            this.heartManager.increase();
             this.next();
         }
-
         else{
-            alert("再想想 ❤️");
+            this.animationManager.wrong(button)
         }
     }
 
     next(){
         this.currentIndex++;
-        if(
-            this.currentIndex
-            >= questions.length
-        ){
-            alert("完成");
+        if(this.currentIndex >= questions.length){
+            alert("Demo Finish.");
             return;
         }
         this.render();

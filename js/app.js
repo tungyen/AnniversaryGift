@@ -7,6 +7,9 @@ from "./questionManager.js";
 import {HeartManager}
 from "./heartManager.js";
 
+import {AnimationManager}
+from "./animationManager.js";
+
 const ui={
 
 screens:{
@@ -36,14 +39,14 @@ heartProgress:
 
 
 const sceneManager = new SceneManager(ui);
-const questionManager = new QuestionManager(ui);
 const heartManager = new HeartManager(ui);
+const animationManager = new AnimationManager();
+const questionManager = new QuestionManager(ui, heartManager, animationManager);
 
 ui.startButton.addEventListener(
     "click",
     ()=>{
         sceneManager.show("question");
-        heartManager.increase();
         questionManager.start();
     }
 );

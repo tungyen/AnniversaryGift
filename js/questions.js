@@ -26,7 +26,7 @@ export const questions = [
         options:[
             "我",
             "妳",
-            "都不記得了"
+            "一起"
         ],
 
         answer:0
