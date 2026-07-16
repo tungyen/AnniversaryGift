@@ -6,12 +6,14 @@ export class QuestionManager{
     constructor(
         questionUI,
         heartManager,
-        animationManager
+        animationManager,
+        sceneManager
     )
     {
         this.questionUI = questionUI;
         this.heartManager = heartManager;
         this.animationManager = animationManager;
+        this.sceneManager = sceneManager;
         this.currentIndex = 0;
         this.finished = false;
     }
@@ -63,17 +65,8 @@ export class QuestionManager{
     }
 
     next(){
-        console.log(
-            "next called, currentIndex before:",
-            this.currentIndex
-        );
         this.currentIndex++;
-        console.log(
-            "currentIndex after:",
-            this.currentIndex
-        );
         if(this.currentIndex >= questions.length){
-            console.log("trigger end");
             this.end();
             return;
         }
@@ -82,11 +75,6 @@ export class QuestionManager{
 
     end(){
         this.finished = true;
-        showModal({
-            emoji:"❤️",
-            title:"完成啦！",
-            message:"妳陪我完成了所有回憶問題",
-            buttonText:"太棒了"
-        });
+        this.sceneManager.change("ending");
     }
 }
