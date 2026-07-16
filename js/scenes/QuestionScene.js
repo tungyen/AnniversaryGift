@@ -3,14 +3,20 @@ import { BaseScene } from "./BaseScene.js";
 
 export class QuestionScene extends BaseScene {
 
-    constructor(questionManager) {
+    constructor(
+        questionManager,
+        memoryScene
+    ) {
         super();
         this.questionManager = questionManager;
+        this.memoryScene = memoryScene;
     }
 
     onEnter() {
         console.log("Enter Question Scene");
-        this.questionManager.start();
+        if (!this.questionManager.started) {
+            this.questionManager.start();
+        }
     }
 
     onLeave() {

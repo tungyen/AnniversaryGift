@@ -1,4 +1,4 @@
-import {questions} from "./questions.js";
+import {questions} from "../data/questions.js";
 import {showModal} from "./modalManager.js";
 
 
@@ -7,19 +7,23 @@ export class QuestionManager{
         questionUI,
         heartManager,
         animationManager,
-        sceneManager
+        sceneManager,
+        showMemory
     )
     {
         this.questionUI = questionUI;
         this.heartManager = heartManager;
         this.animationManager = animationManager;
         this.sceneManager = sceneManager;
+        this.showMemory = showMemory;
         this.currentIndex = 0;
+        this.started = false;
         this.finished = false;
     }
 
     start(){
         this.currentIndex = 0;
+        this.started = true;
         this.finished = false;
         this.render();
     }
@@ -48,7 +52,7 @@ export class QuestionManager{
             this.heartManager.increase();
             setTimeout(async ()=>{
                 await this.questionUI.transition();
-                this.next();
+                this.showMemory(question.memory);
             },800);
         }
         else{
@@ -68,9 +72,10 @@ export class QuestionManager{
         this.currentIndex++;
         if(this.currentIndex >= questions.length){
             this.end();
-            return;
+            return false;
         }
         this.render();
+        return true;
     }
 
     end(){
