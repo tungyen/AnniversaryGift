@@ -1,131 +1,200 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* =========================
+   Reset & Base
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    width:100vw;
-    height:100vh;
-    overflow:hidden;
-    font-family:"Noto Sans TC",sans-serif;
-    background:
-    linear-gradient(
-        135deg,
-        #B9E6FF,
-        #EAF8FF
-    );
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Noto Sans TC", sans-serif;
+    background: linear-gradient(135deg, #B9E6FF, #EAF8FF);
 }
 
-.screen{
-    width:100%;
-    height:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+h1 {
+    margin-top: 20px;
 }
 
-.hidden{
-    display:none;
+p {
+    margin-top: 15px;
 }
 
-.card{
-    width:500px;
-    padding:50px;
-    background:rgba(255,255,255,.8);
-    border-radius:30px;
-    text-align:center;
-    box-shadow:
-    0 15px 40px rgba(0,0,0,.1);
+/* =========================
+   Layout
+========================= */
+
+.screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-h1{
-    margin-top:20px;
+.hidden {
+    display: none;
 }
 
-p{
-    margin-top:15px;
+.card {
+    width: 500px;
+    padding: 50px;
+    background: rgba(255, 255, 255, .8);
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .1);
 }
 
-.hero-heart{
-    font-size:80px;
-    animation:
-    floatHeart 2s ease-in-out infinite;
-}
+/* =========================
+   Buttons
+========================= */
 
-.hero-heart-wrapper{
-    display:flex;
-    justify-content:center;
-}
-
-@keyframes floatHeart{
-    0%,100%{
-        transform:
-        translateY(0);
-    }
-
-    50%{
-        transform:
-        translateY(-10px);
-    }
-}
-
-button{
-    border:none;
-    cursor:pointer;
+button {
+    border: none;
+    cursor: pointer;
     transition:
         transform .2s ease,
         box-shadow .2s ease;
 }
 
-.primary-button{
-    margin-top:40px;
-    padding:
-        15px
-        45px;
-
-    border-radius:999px;
-    background:#ff8fab;
-    color:white;
-    font-size:18px;
-    font-weight:600;
-    box-shadow:
-    0 10px 25px rgba(255,107,129,.25);
+.primary-button {
+    margin-top: 40px;
+    padding: 15px 45px;
+    border-radius: 999px;
+    background: #ff8fab;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(255, 107, 129, .25);
 }
 
-
-.primary-button:hover{
-    transform:
-    translateY(-4px);
-    box-shadow:
-    0 15px 35px rgba(255,107,129,.35);
+.primary-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(255, 107, 129, .35);
 }
 
-
-.primary-button:active{
-    transform:
-    scale(.96);
-}
-
-#heart-progress{
-    position:fixed;
-    top:30px;
-    right:40px;
-    display:flex;
-    gap:8px;
-    font-size:28px;
-    color:#ff8fab;
-    z-index:100;
+.primary-button:active {
+    transform: scale(.96);
 }
 
 /* =========================
-   Modal Overlay
+   Home — Hero Heart
+========================= */
+
+.hero-heart-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-heart {
+    font-size: 80px;
+    animation: floatHeart 2s ease-in-out infinite;
+}
+
+@keyframes floatHeart {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* =========================
+   Home — Entrance Animation
+========================= */
+
+.fade-item {
+    opacity: 0;
+    animation: fadeUp .8s ease forwards;
+}
+
+.hero-heart.fade-item {
+    animation-delay: .1s;
+}
+
+h1.fade-item {
+    animation-delay: .3s;
+}
+
+p.fade-item {
+    animation-delay: .5s;
+}
+
+.primary-button.fade-item {
+    animation-delay: .7s;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   Heart Progress Indicator
+========================= */
+
+#heart-progress {
+    position: fixed;
+    top: 30px;
+    right: 40px;
+    display: flex;
+    gap: 8px;
+    font-size: 28px;
+    color: #ff8fab;
+    z-index: 100;
+}
+
+.heart {
+    display: inline-block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #ff8fab;
+    transition: transform .2s ease;
+}
+
+.heart.filled {
+    color: #ff6b81;
+    -webkit-text-stroke: 0;
+}
+
+.heart-pop {
+    animation: heartPop .35s ease;
+}
+
+@keyframes heartPop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.4);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   Modal
 ========================= */
 
 #modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.45);
+    background: rgba(0, 0, 0, 0.45);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -133,306 +202,214 @@ button{
     animation: fadeIn 0.25s ease;
 }
 
-/* Hidden */
 #modal-overlay.hidden {
     display: none;
 }
 
-/* =========================
-   Modal Card
-========================= */
-
 #modal {
     width: 320px;
-    background:white;
-    border-radius:24px;
-    padding:32px 28px;
-    text-align:center;
-    box-shadow:
-        0 20px 60px rgba(0,0,0,0.25);
+    background: white;
+    border-radius: 24px;
+    padding: 32px 28px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
     animation: modalPop 0.25s ease;
 }
 
-/* Emoji */
 #modal-emoji {
-    font-size:48px;
-    margin-bottom:16px;
+    font-size: 48px;
+    margin-bottom: 16px;
 }
 
-
-/* Title */
 #modal-title {
-    font-size:24px;
-    font-weight:700;
-    margin-bottom:12px;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
 }
 
-/* Message */
 #modal-message {
-    font-size:16px;
-    color:#666;
-    line-height:1.6;
-    margin-bottom:24px;
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 24px;
 }
 
-/* Button */
 #modal-button {
-    width:100%;
-    padding:14px;
-    border-radius:16px;
-    background:#ff6b81;
-    color:white;
-    font-size:16px;
-    font-weight:600;
+    width: 100%;
+    padding: 14px;
+    border-radius: 16px;
+    background: #ff6b81;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 #modal-button:hover {
-    transform:translateY(-2px);
-    opacity:0.9;
+    transform: translateY(-2px);
+    opacity: 0.9;
 }
-
 
 #modal-button:active {
-    transform:scale(0.96);
+    transform: scale(0.96);
 }
-
-/* =========================
-   Animation
-========================= */
-
 
 @keyframes fadeIn {
     from {
-        opacity:0;
+        opacity: 0;
     }
 
     to {
-        opacity:1;
+        opacity: 1;
     }
 }
 
 @keyframes modalPop {
     from {
-        opacity:0;
-        transform:
-            scale(0.85)
-            translateY(20px);
+        opacity: 0;
+        transform: scale(0.85) translateY(20px);
     }
 
     to {
-        opacity:1;
-        transform:
-            scale(1)
-            translateY(0);
-    }
-}
-
-.question-card{
-    transition:
-    opacity .3s ease,
-    transform .3s ease;
-}
-
-.question-card.fade-out{
-    opacity:0;
-    transform:
-    translateY(20px);
-}
-
-.question-header{
-    font-size:18px;
-    color:#ff6b81;
-    margin-bottom:20px;
-}
-
-#question-title{
-    font-size:24px;
-    line-height:1.5;
-    margin-bottom:28px;
-}
-
-#options-container{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
-
-#options-container button{
-    padding:16px;
-    border-radius:18px;
-    background:#fff0f3;
-    color:#444;
-    font-size:16px;
-    font-weight:600;
-}
-
-#options-container button:hover{
-    transform:translateY(-3px);
-    box-shadow:
-    0 8px 20px rgba(0,0,0,0.1);
-}
-
-#options-container button:active{
-    transform:scale(.96);
-}
-
-#options-container button.correct{
-    background:#ff6b81;
-    color:white;
-    transform:scale(1.08);
-    box-shadow:
-    0 10px 25px rgba(255,107,129,0.35);
-}
-
-#options-container button.wrong{
-    animation: shake 0.3s;
-}
-
-@keyframes shake{
-    0%,100%{
-        transform:translateX(0);
-    }
-
-    25%{
-        transform:translateX(-8px);
-    }
-
-    75%{
-        transform:translateX(8px);
-    }
-}
-
-.heart{
-    display:inline-block;
-    transition:
-        transform .2s ease;
-}
-
-.heart.filled{
-    color:#ff6b81;
-}
-
-.heart-pop{
-    animation:
-    heartPop .35s ease;
-}
-
-@keyframes heartPop{
-    0%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.4);
-    }
-
-    100%{
-        transform:scale(1);
-    }
-}
-
-/* =====================
-   Home Animation
-===================== */
-
-.fade-item{
-    opacity:0;
-    animation:
-    fadeUp .8s ease forwards;
-}
-
-.hero-heart.fade-item{
-    animation-delay:.1s;
-}
-
-h1.fade-item{
-    animation-delay:.3s;
-}
-
-p.fade-item{
-    animation-delay:.5s;
-}
-
-.primary-button.fade-item{
-    animation-delay:.7s;
-}
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:
-        translateY(30px);
-    }
-
-    to{
-        opacity:1;
-        transform:
-        translateY(0);
+        opacity: 1;
+        transform: scale(1) translateY(0);
     }
 }
 
 /* =========================
-   Memory Scene
+   Question Card
 ========================= */
 
-.memory-card{
-    width:360px;
-    max-width:90%;
-    padding:30px;
-    background:
-    rgba(255,255,255,.9);
-    border-radius:30px;
-    text-align:center;
-    box-shadow:
-    0 20px 50px rgba(0,0,0,.12);
-    animation:
-    memoryEnter .5s ease;
+.question-card {
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
 }
 
-.memory-heart{
-    font-size:40px;
-    margin-bottom:20px;
+.question-card.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
-#memory-image{
-    width:100%;
-    height:240px;
-    object-fit:cover;
-    border-radius:22px;
-    margin-bottom:24px;
+.question-header {
+    font-size: 18px;
+    color: #ff6b81;
+    margin-bottom: 20px;
 }
 
-#memory-title{
-    font-size:26px;
-    color:#ff6b81;
-    margin-bottom:15px;
+#question-title {
+    font-size: 24px;
+    line-height: 1.5;
+    margin-bottom: 28px;
 }
 
-#memory-text{
-    font-size:16px;
-    color:#555;
-    line-height:1.8;
-    margin-bottom:30px;
+#options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
-@keyframes memoryEnter{
-    from{
-        opacity:0;
-        transform:
-        translateY(30px)
-        scale(.95);
+#options-container button {
+    padding: 16px;
+    border-radius: 18px;
+    background: #fff0f3;
+    color: #444;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#options-container button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+#options-container button:active {
+    transform: scale(.96);
+}
+
+#options-container button.correct {
+    background: #ff6b81;
+    color: white;
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(255, 107, 129, 0.35);
+}
+
+#options-container button.wrong {
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
     }
 
-    to{
-        opacity:1;
-        transform:
-        translateY(0)
-        scale(1);
+    25% {
+        transform: translateX(-8px);
+    }
+
+    75% {
+        transform: translateX(8px);
     }
 }
 
-@media(max-width:600px){
-    #memory-image{
-        height:220px;
+/* =========================
+   Memory Card
+========================= */
+
+.memory-card {
+    width: 360px;
+    max-width: 90%;
+    padding: 30px;
+    background: rgba(255, 255, 255, .9);
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .12);
+    animation: memoryEnter .5s ease;
+}
+
+.memory-heart {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+#memory-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 22px;
+    margin-bottom: 24px;
+}
+
+#memory-title {
+    font-size: 26px;
+    color: #ff6b81;
+    margin-bottom: 15px;
+}
+
+#memory-text {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+@keyframes memoryEnter {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 600px) {
+    #memory-image {
+        height: 220px;
     }
 }

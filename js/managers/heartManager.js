@@ -1,34 +1,30 @@
 export class HeartManager{
 
-    constructor(ui){
+    constructor(ui, total){
         this.ui = ui;
-        this.total = 5;
-        this.progress = 0;
+        this.total = total;
+        this.filled = 0;
         this.render();
     }
 
-    increase(amount=20){
-        const oldFiled = Math.floor(this.progress / amount);
-        this.progress = Math.min(this.progress + amount, 100);
-        this.render();
-        const newFilled = Math.floor(this.progress / amount);
-        if (newFilled > oldFiled) {
-            this.animateHeart(newFilled - 1);
+    increase(){
+        if(this.filled >= this.total){
+            return;
         }
+        this.filled++;
+        this.render();
+        this.animateHeart(this.filled - 1);
     }
 
     render(){
-        const filled = Math.floor(this.progress / 20);
         this.ui.heartProgress.innerHTML="";
         for(let i=0;i<this.total;i++){
             const heart = document.createElement("span");
             heart.classList.add("heart");
+            heart.textContent="♥";
 
-            if(i < filled){
-                heart.textContent="♥";
+            if(i < this.filled){
                 heart.classList.add("filled");
-            } else{
-                heart.textContent="♡";
             }
             this.ui.heartProgress.appendChild(heart);
         }

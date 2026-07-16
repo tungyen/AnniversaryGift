@@ -6,19 +6,20 @@ export class QuestionManager{
     constructor(
         questionUI,
         heartManager,
-        animationManager,
-        sceneManager,
-        showMemory
+        animationManager
     )
     {
         this.questionUI = questionUI;
         this.heartManager = heartManager;
         this.animationManager = animationManager;
-        this.sceneManager = sceneManager;
-        this.showMemory = showMemory;
+        this._onCorrectAnswer = null;
         this.currentIndex = 0;
         this.started = false;
         this.finished = false;
+    }
+
+    onCorrectAnswer(callback){
+        this._onCorrectAnswer = callback;
     }
 
     start(){
@@ -52,7 +53,7 @@ export class QuestionManager{
             this.heartManager.increase();
             setTimeout(async ()=>{
                 await this.questionUI.transition();
-                this.showMemory(question.memory);
+                this._onCorrectAnswer(question.memory);
             },800);
         }
         else{
@@ -71,15 +72,10 @@ export class QuestionManager{
     next(){
         this.currentIndex++;
         if(this.currentIndex >= questions.length){
-            this.end();
+            this.finished = true;
             return false;
         }
         this.render();
         return true;
-    }
-
-    end(){
-        this.finished = true;
-        this.sceneManager.change("ending");
     }
 }

@@ -9,17 +9,18 @@ import {SceneManager} from "./sceneManager.js";
 // Import UI
 import { QuestionUI } from "./ui/questionUI.js";
 
+// Import data
+import { questions } from "./data/questions.js";
+
 // Import scene
 import { HomeScene } from "./scenes/HomeScene.js";
-import { QuestionScene } from "./scenes/QuestionScene.js";
+import { QuestionFlowScene } from "./scenes/QuestionFlowScene.js";
 import { EndingScene } from "./scenes/EndingScene.js";
-import { MemoryScene } from "./scenes/MemoryScene.js";
 
 const ui={
     screens:{
         home: document.getElementById("home-screen"),
-        question: document.getElementById("question-screen"),
-        memory: document.getElementById("memory-screen"),
+        question: document.getElementById("question-flow-screen"),
         ending: document.getElementById("ending-screen")
     },
 
@@ -37,47 +38,26 @@ const ui={
 // Construct the scene manager.
 const sceneManager = new SceneManager(ui);
 
-// Construct the callback function.
-function showMemory(memory){
-    memoryScene.setMemory(memory);
-    sceneManager.change("memory");
-}
-
-function continueQuestion(){
-    const hasNext = questionManager.next();
-    if (hasNext) {
-        sceneManager.change("question");
-    }
-}
-
 // Construct the manager.
-const heartManager = new HeartManager(ui);
+const heartManager = new HeartManager(ui, questions.length);
 const animationManager = new AnimationManager();
 const questionUI = new QuestionUI(ui);
 const questionManager =
     new QuestionManager(
         questionUI,
         heartManager,
-        animationManager,
-        sceneManager,
-        showMemory
+        animationManager
 );
 
 // Construct the scene
 const homeScene = new HomeScene(ui, sceneManager);
-const questionScene = new QuestionScene(questionManager);
+const questionFlowScene = new QuestionFlowScene(ui, questionManager, sceneManager);
 const endingScene = new EndingScene();
-const memoryScene =
-    new MemoryScene(
-        ui,
-        continueQuestion
-);
 
 // Register scene
 sceneManager.register("home", homeScene);
-sceneManager.register("question", questionScene);
+sceneManager.register("question", questionFlowScene);
 sceneManager.register("ending", endingScene);
-sceneManager.register("memory", memoryScene);
 
 // Init
 sceneManager.change("home");
