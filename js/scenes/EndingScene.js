@@ -13,6 +13,8 @@ export class EndingScene extends BaseScene {
 
         this.videoOverlay = ui.videoOverlay;
         this.video = ui.video;
+        this.video.playInline = true;
+        this.video.controls = false;
         this.skipVideoButton = ui.skipVideoButton;
 
         this.bindEvents();

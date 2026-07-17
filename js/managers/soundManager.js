@@ -2,10 +2,18 @@ export class SoundManager {
 
     constructor() {
         this.correctSound = new Audio("assets/audios/correct.mp3");
+        this.correctSound.volume = 0.25
+
         this.completeSound = new Audio("assets/audios/complete.mp3");
+        this.completeSound.volume = 0.3
+
         this.wrongSound = new Audio("assets/audios/wrong.mp3");
+        this.wrongSound.volume = 0.25
+
         this.nextSound = new Audio("assets/audios/next.mp3");
+    
         this.startSound = new Audio("assets/audios/start.mp3");
+        this.startSound.volume = 0.25;
 
         this.bgm = new Audio("assets/audios/bgm.mp3");
         this.bgm.loop = true;
