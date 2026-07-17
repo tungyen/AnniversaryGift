@@ -17,10 +17,7 @@ function showModal({
     modalButton.textContent = buttonText;
     modalOverlay.classList.remove("hidden");
 
-    modalButton.replaceWith(modalButton.cloneNode(true));
-    const newButton = document.getElementById("modal-button");
-
-    newButton.onclick = () => {
+    modalButton.onclick = () => {
         hideModal();
         if(onConfirm){
             onConfirm();

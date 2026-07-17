@@ -1,5 +1,6 @@
 import {questions} from "../data/questions.js";
 import {showModal} from "./modalManager.js";
+import {wrongMessages} from "../data/wrongMessages.js";
 
 
 export class QuestionManager{
@@ -59,11 +60,14 @@ export class QuestionManager{
         else{
             this.animationManager.wrong(button);
             setTimeout(()=>{
+                const random =
+                    wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
+
                 showModal({
-                    emoji:"🥺",
-                    title:"妳真的確定嗎？",
-                    message:"再想想看嘛 ❤️",
-                    buttonText:"再看看"
+                    emoji: random.emoji,
+                    title: random.title,
+                    message: random.message,
+                    buttonText: random.button_text,
                 });
             },300);
         }

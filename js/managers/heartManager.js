@@ -4,43 +4,41 @@ export class HeartManager{
         this.ui = ui;
         this.total = total;
         this.filled = 0;
-        this.render();
+        this.build();
+    }
+
+    build(){
+        this.ui.heartProgress.innerHTML =
+            '<span class="heart-progress-icon">' +
+                '<span class="heart-fill">♥</span>' +
+                '<span class="heart-outline">♥</span>' +
+            '</span>';
+
+        this.heartIcon = this.ui.heartProgress.querySelector(".heart-progress-icon");
+        this.fillLayer = this.ui.heartProgress.querySelector(".heart-fill");
     }
 
     increase(){
         if(this.filled >= this.total){
             return;
         }
+
         this.filled++;
-        this.render();
-        this.animateHeart(this.filled - 1);
+        this.updateFill();
+        this.animateHeart();
     }
 
-    render(){
-        this.ui.heartProgress.innerHTML="";
-        for(let i=0;i<this.total;i++){
-            const heart = document.createElement("span");
-            heart.classList.add("heart");
-            heart.textContent="♥";
+    updateFill(){
+        const percent = (this.filled / this.total) * 100;
+        const clipFromTop = 100 - percent;
 
-            if(i < this.filled){
-                heart.classList.add("filled");
-            }
-            this.ui.heartProgress.appendChild(heart);
-        }
+        this.fillLayer.style.clipPath = `inset(${clipFromTop}% 0 0 0)`;
     }
 
-    animateHeart(index){
-        const hearts = this.ui.heartProgress.querySelectorAll(".heart");
-        const heart = hearts[index];
-
-        if(!heart){
-            return;
-        }
-
-        heart.classList.add("heart-pop");
+    animateHeart(){
+        this.heartIcon.classList.add("pop");
         setTimeout(()=>{
-            heart.classList.remove("heart-pop");
+            this.heartIcon.classList.remove("pop");
         },400);
     }
 }
