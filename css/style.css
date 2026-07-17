@@ -400,6 +400,17 @@ p.fade-item {
     object-fit: cover;
     border-radius: 22px;
     margin-bottom: 24px;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+#memory-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+}
+
+#memory-image:active {
+    transform: scale(.98);
 }
 
 #memory-title {
@@ -515,6 +526,57 @@ p.fade-item {
         transform: translate(var(--drift), 115vh) rotate(var(--rotate));
         opacity: .9;
     }
+}
+
+/* =========================
+   Photo Lightbox
+========================= */
+
+#photo-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 900;
+    padding: 30px;
+    animation: fadeIn .25s ease;
+}
+
+#photo-lightbox.hidden {
+    display: none;
+}
+
+#lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+    animation: modalPop .25s ease;
+}
+
+#lightbox-close-button {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .15);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    backdrop-filter: blur(6px);
+    z-index: 901;
+}
+
+#lightbox-close-button:hover {
+    background: rgba(255, 255, 255, .28);
+    transform: translateY(-2px);
+}
+
+#lightbox-close-button:active {
+    transform: scale(.96);
 }
 
 /* =========================

@@ -1,4 +1,5 @@
 import { BaseScene } from "./BaseScene.js";
+import { showLightbox } from "../managers/photoLightboxManager.js";
 
 export class QuestionFlowScene extends BaseScene {
     constructor(
@@ -18,6 +19,10 @@ export class QuestionFlowScene extends BaseScene {
 
         this.questionManager.onCorrectAnswer((memory) => this.showMemory(memory));
         this.ui.memoryNextButton.onclick = () => this.memoryNext();
+
+        this.ui.memoryImage.onclick = () => {
+            showLightbox(this.ui.memoryImage.src);
+        };
     }
 
     onEnter() {
