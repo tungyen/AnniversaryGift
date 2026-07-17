@@ -3,6 +3,7 @@ import {QuestionManager} from "./managers/questionManager.js";
 import {HeartManager} from "./managers/heartManager.js";
 import {AnimationManager} from "./managers/animationManager.js";
 import {SoundManager} from "./managers/soundManager.js";
+import {ConfettiManager} from "./managers/confettiManager.js";
 
 // Import scene manager
 import {SceneManager} from "./sceneManager.js";
@@ -63,6 +64,7 @@ const sceneManager = new SceneManager(ui);
 const heartManager = new HeartManager(ui, questions.length);
 const animationManager = new AnimationManager();
 const soundManager = new SoundManager();
+const confettiManager = new ConfettiManager();
 const questionUI = new QuestionUI(ui);
 const questionManager =
     new QuestionManager(
@@ -87,7 +89,7 @@ const questionFlowScene =
         sceneManager,
         soundManager
 );
-const endingScene = new EndingScene(ui, soundManager);
+const endingScene = new EndingScene(ui, soundManager, confettiManager);
 
 // Register scene.
 sceneManager.register("home", homeScene);
