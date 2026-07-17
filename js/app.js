@@ -24,15 +24,31 @@ const ui={
         ending: document.getElementById("ending-screen")
     },
 
+    // Question card.
     questionTitle: document.getElementById("question-title"),
     optionsContainer: document.getElementById("options-container"),
     questionNumber: document.getElementById("question-number"),
     startButton: document.getElementById("start-button"),
+
+    // Memory card.
     heartProgress: document.getElementById("heart-progress"),
     memoryImage: document.getElementById("memory-image"),
     memoryTitle: document.getElementById("memory-title"),
     memoryText: document.getElementById("memory-text"),
-    memoryNextButton: document.getElementById("memory-next-button")
+    memoryNextButton: document.getElementById("memory-next-button"),
+
+    questionCard: document.querySelector(".question-card"),
+    memoryCard: document.querySelector(".memory-card"),
+
+    // Ending scene.
+    playVideoButton: document.getElementById("play-video-button"),
+    restartButton: document.getElementById("restart-button"),
+    introCard: document.querySelector(".ending-intro"),
+    finalCard: document.querySelector(".ending-final"),
+
+    videoOverlay: document.getElementById("video-overlay"),
+    video: document.getElementById("ending-video"),
+    skipVideoButton: document.getElementById("skip-video-button"),
 };
 
 // Construct the scene manager.
@@ -52,7 +68,7 @@ const questionManager =
 // Construct the scene
 const homeScene = new HomeScene(ui, sceneManager);
 const questionFlowScene = new QuestionFlowScene(ui, questionManager, sceneManager);
-const endingScene = new EndingScene();
+const endingScene = new EndingScene(ui);
 
 // Register scene
 sceneManager.register("home", homeScene);

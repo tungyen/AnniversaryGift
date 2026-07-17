@@ -7,8 +7,8 @@ export class QuestionFlowScene extends BaseScene {
         this.questionManager = questionManager;
         this.sceneManager = sceneManager;
 
-        this.questionCard = document.querySelector(".question-card");
-        this.memoryCard = document.querySelector(".memory-card");
+        this.questionCard = ui.questionCard;
+        this.memoryCard = ui.memoryCard;
 
         this.questionManager.onCorrectAnswer((memory) => this.showMemory(memory));
         this.ui.memoryNextButton.onclick = () => this.memoryNext();

@@ -405,6 +405,63 @@ p.fade-item {
 }
 
 /* =========================
+   Ending Scene
+========================= */
+
+.ending-intro,
+.ending-final {
+    animation: memoryEnter .5s ease;
+}
+
+/* =========================
+   Video Overlay
+========================= */
+
+#video-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn .35s ease;
+}
+
+#video-overlay.hidden {
+    display: none;
+}
+
+#ending-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#skip-video-button {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .15);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    backdrop-filter: blur(6px);
+    z-index: 1001;
+}
+
+#skip-video-button:hover {
+    background: rgba(255, 255, 255, .28);
+    transform: translateY(-2px);
+}
+
+#skip-video-button:active {
+    transform: scale(.96);
+}
+
+/* =========================
    Responsive
 ========================= */
 

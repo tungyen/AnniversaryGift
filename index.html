@@ -78,10 +78,33 @@
             id="ending-screen"
             class="screen hidden">
 
-            <div class="card">
-                <div class="hero-heart">❤️</div>
-                <h1>恭喜完成！</h1>
-                <p>妳陪我完成了所有回憶 ❤️</p>
+            <div class="card ending-intro">
+                <div class="hero-heart-wrapper fade-item">
+                    <div class="hero-heart">❤️</div>
+                </div>
+                <h1 class="fade-item">恭喜完成！</h1>
+                <p class="fade-item">妳陪我完成了所有回憶 ❤️</p>
+
+                <button
+                    id="play-video-button"
+                    class="primary-button fade-item">
+                    播放我們的回憶影片 🎬
+                </button>
+            </div>
+
+             <div class="card ending-final hidden">
+                <div class="hero-heart-wrapper fade-item">
+                    <div class="hero-heart">❤️</div>
+                </div>
+
+                <h1 class="fade-item">兩周年紀念日快樂</h1>
+                <p class="fade-item">謝謝妳一直陪在我身邊，未來也是 ❤️</p>
+
+                <button
+                    id="restart-button"
+                    class="primary-button fade-item">
+                    重新開始 🔄
+                </button>
             </div>
         </section>
     </div>
@@ -97,6 +120,19 @@
                 再看看
             </button>
         </div>
+    </div>
+
+    <!--Ending Video Overlay-->
+    <div id="video-overlay" class="hidden">
+        <video
+            id="ending-video"
+            src="assets/videos/anniversary.mp4"
+            playsinline>
+        </video>
+
+        <button id="skip-video-button">
+            跳過 ✕
+        </button>
     </div>
 
     <script 
