@@ -29,6 +29,7 @@ const ui={
 
     // Home.
     daysTogether: document.getElementById("days-together"),
+    bgmToggleButton: document.getElementById("bgm-toggle-button"),
 
     // Question card.
     questionTitle: document.getElementById("question-title"),
@@ -98,3 +99,9 @@ sceneManager.register("ending", endingScene);
 
 // Init.
 sceneManager.change("home");
+
+// Play the BGM.
+ui.bgmToggleButton.onclick = () => {
+    const isPlaying = soundManager.toggleBgm();
+    ui.bgmToggleButton.textContent = isPlaying ? "🎵" : "🔇";
+};

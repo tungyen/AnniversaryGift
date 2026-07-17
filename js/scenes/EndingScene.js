@@ -49,6 +49,7 @@ export class EndingScene extends BaseScene {
     playVideo() {
         this.videoOverlay.classList.remove("hidden");
         this.video.currentTime = 0;
+        this.soundManager.duckBgmForVideo();
 
         const playPromise = this.video.play();
         if (playPromise) {
@@ -61,6 +62,7 @@ export class EndingScene extends BaseScene {
     finishVideo() {
         this.video.pause();
         this.videoOverlay.classList.add("hidden");
+        this.soundManager.restoreBgmAfterVideo();
 
         this.introCard.classList.add("hidden");
         this.finalCard.classList.remove("hidden");

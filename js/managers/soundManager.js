@@ -6,6 +6,15 @@ export class SoundManager {
         this.wrongSound = new Audio("assets/audios/wrong.mp3");
         this.nextSound = new Audio("assets/audios/next.mp3");
         this.startSound = new Audio("assets/audios/start.mp3");
+
+        this.bgm = new Audio("assets/audios/bgm.mp3");
+        this.bgm.loop = true;
+        this.bgm.volume = 0.35;
+
+        this.bgmEnabled = true;
+        this.bgmWasPlayingBeforeVideo = false;
+
+        this.unlockBgmOnFirstInteraction();
     }
 
     playCorrect() {
@@ -41,5 +50,51 @@ export class SoundManager {
         this.startSound.play().catch((err) => {
             console.warn("Start sound blocked:", err);
         });
+    }
+
+    toggleBgm() {
+        if (this.bgmEnabled) {
+            this.pauseBgm();
+        } else {
+            this.startBgm();
+        }
+        return this.bgmEnabled;
+    }
+
+    startBgm() {
+        this.bgmEnabled = true;
+        this.bgm.play().catch((err) => {
+            console.warn("BGM play blocked:", err);
+        });
+    }
+
+    pauseBgm() {
+        this.bgmEnabled = false;
+        this.bgm.pause();
+    }
+
+    duckBgmForVideo() {
+        this.bgmWasPlayingBeforeVideo = this.bgmEnabled;
+        this.bgm.pause();
+    }
+
+    restoreBgmAfterVideo() {
+        if (this.bgmWasPlayingBeforeVideo) {
+            this.bgm.play().catch((err) => {
+                console.warn("BGM resume blocked:", err);
+            });
+        }
+    }
+
+    unlockBgmOnFirstInteraction() {
+        const tryPlay = () => {
+            if (this.bgmEnabled) {
+                this.bgm.play().catch(() => {
+                    // Still blocked, will retry on next interaction.
+                });
+            }
+        };
+
+        document.addEventListener("click", tryPlay, { once: true });
     }
 }
