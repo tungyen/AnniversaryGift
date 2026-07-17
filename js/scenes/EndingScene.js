@@ -2,9 +2,10 @@ import { BaseScene } from "./BaseScene.js";
 
 export class EndingScene extends BaseScene {
 
-    constructor(ui) {
+    constructor(ui ,soundManager) {
         super();
         this.ui = ui;
+        this.soundManager = soundManager;
 
         this.introCard = ui.introCard;
         this.finalCard = ui.finalCard;
@@ -19,6 +20,7 @@ export class EndingScene extends BaseScene {
     onEnter() {
         console.log("Enter Ending Scene");
         this.showIntro();
+        this.soundManager.playComplete();
     }
 
     onLeave() {

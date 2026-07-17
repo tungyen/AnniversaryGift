@@ -1,11 +1,17 @@
 import { BaseScene } from "./BaseScene.js";
 
 export class QuestionFlowScene extends BaseScene {
-    constructor(ui, questionManager, sceneManager) {
+    constructor(
+        ui,
+        questionManager,
+        sceneManager,
+        soundManager
+    ) {
         super();
         this.ui = ui;
         this.questionManager = questionManager;
         this.sceneManager = sceneManager;
+        this.soundManager = soundManager;
 
         this.questionCard = ui.questionCard;
         this.memoryCard = ui.memoryCard;
@@ -40,6 +46,7 @@ export class QuestionFlowScene extends BaseScene {
     memoryNext() {
         const hasNext = this.questionManager.next();
         if (hasNext) {
+            this.soundManager.playNext();
             this.showQuestion();
         } else {
             this.sceneManager.change("ending");

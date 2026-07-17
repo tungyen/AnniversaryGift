@@ -2,10 +2,11 @@ import { BaseScene } from "./BaseScene.js";
 
 export class HomeScene extends BaseScene {
 
-    constructor(ui, screenManager, startDate) {
+    constructor(ui, screenManager, soundManager, startDate) {
         super();
         this.ui = ui;
         this.screenManager = screenManager;
+        this.soundManager = soundManager;
         this.startDate = startDate;
     }
 
@@ -21,6 +22,7 @@ export class HomeScene extends BaseScene {
 
     bindEvents() {
         this.ui.startButton.onclick = () => {
+            this.soundManager.playStart();
             this.screenManager.change("question");
         }
     }

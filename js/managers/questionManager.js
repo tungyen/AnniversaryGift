@@ -7,12 +7,14 @@ export class QuestionManager{
     constructor(
         questionUI,
         heartManager,
-        animationManager
+        animationManager,
+        soundManager
     )
     {
         this.questionUI = questionUI;
         this.heartManager = heartManager;
         this.animationManager = animationManager;
+        this.soundManager = soundManager;
         this._onCorrectAnswer = null;
         this.currentIndex = 0;
         this.started = false;
@@ -52,6 +54,7 @@ export class QuestionManager{
         if(index === question.answer){
             this.animationManager.correct(button);
             this.heartManager.increase();
+            this.soundManager.playCorrect();
             setTimeout(async ()=>{
                 await this.questionUI.transition();
                 this._onCorrectAnswer(question.memory);
@@ -59,6 +62,7 @@ export class QuestionManager{
         }
         else{
             this.animationManager.wrong(button);
+            this.soundManager.playWrong();
             setTimeout(()=>{
                 const random =
                     wrongMessages[Math.floor(Math.random() * wrongMessages.length)];

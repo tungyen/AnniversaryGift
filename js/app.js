@@ -2,6 +2,7 @@
 import {QuestionManager} from "./managers/questionManager.js";
 import {HeartManager} from "./managers/heartManager.js";
 import {AnimationManager} from "./managers/animationManager.js";
+import {SoundManager} from "./managers/soundManager.js";
 
 // Import scene manager
 import {SceneManager} from "./sceneManager.js";
@@ -61,18 +62,32 @@ const sceneManager = new SceneManager(ui);
 // Construct the manager.
 const heartManager = new HeartManager(ui, questions.length);
 const animationManager = new AnimationManager();
+const soundManager = new SoundManager();
 const questionUI = new QuestionUI(ui);
 const questionManager =
     new QuestionManager(
         questionUI,
         heartManager,
-        animationManager
+        animationManager,
+        soundManager
 );
 
 // Construct the scene.
-const homeScene = new HomeScene(ui, sceneManager, RELATIONSHIP_START_DATE);
-const questionFlowScene = new QuestionFlowScene(ui, questionManager, sceneManager);
-const endingScene = new EndingScene(ui);
+const homeScene =
+    new HomeScene(
+        ui,
+        sceneManager,
+        soundManager,
+        RELATIONSHIP_START_DATE
+);
+const questionFlowScene =
+    new QuestionFlowScene(
+        ui,
+        questionManager,
+        sceneManager,
+        soundManager
+);
+const endingScene = new EndingScene(ui, soundManager);
 
 // Register scene.
 sceneManager.register("home", homeScene);
