@@ -9,10 +9,11 @@ import {SceneManager} from "./sceneManager.js";
 // Import UI
 import { QuestionUI } from "./ui/questionUI.js";
 
-// Import data
+// Import data.
 import { questions } from "./data/questions.js";
+import { RELATIONSHIP_START_DATE } from "./data/config.js";
 
-// Import scene
+// Import scene.
 import { HomeScene } from "./scenes/HomeScene.js";
 import { QuestionFlowScene } from "./scenes/QuestionFlowScene.js";
 import { EndingScene } from "./scenes/EndingScene.js";
@@ -23,6 +24,9 @@ const ui={
         question: document.getElementById("question-flow-screen"),
         ending: document.getElementById("ending-screen")
     },
+
+    // Home.
+    daysTogether: document.getElementById("days-together"),
 
     // Question card.
     questionTitle: document.getElementById("question-title"),
@@ -65,15 +69,15 @@ const questionManager =
         animationManager
 );
 
-// Construct the scene
-const homeScene = new HomeScene(ui, sceneManager);
+// Construct the scene.
+const homeScene = new HomeScene(ui, sceneManager, RELATIONSHIP_START_DATE);
 const questionFlowScene = new QuestionFlowScene(ui, questionManager, sceneManager);
 const endingScene = new EndingScene(ui);
 
-// Register scene
+// Register scene.
 sceneManager.register("home", homeScene);
 sceneManager.register("question", questionFlowScene);
 sceneManager.register("ending", endingScene);
 
-// Init
+// Init.
 sceneManager.change("home");

@@ -126,6 +126,17 @@ p.fade-item {
     animation-delay: .5s;
 }
 
+.days-together.fade-item {
+    animation-delay: .6s;
+}
+
+.days-together {
+    font-size: 14px;
+    color: #ff8fab;
+    font-weight: 600;
+    letter-spacing: .3px;
+}
+
 .primary-button.fade-item {
     animation-delay: .7s;
 }
