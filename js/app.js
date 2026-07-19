@@ -14,6 +14,7 @@ import { QuestionUI } from "./ui/questionUI.js";
 // Import data.
 import { questions } from "./data/questions.js";
 import { RELATIONSHIP_START_DATE } from "./data/config.js";
+import { endingMessages } from "./data/endingMessages.js";
 
 // Import scene.
 import { HomeScene } from "./scenes/HomeScene.js";
@@ -56,6 +57,9 @@ const ui={
     videoOverlay: document.getElementById("video-overlay"),
     video: document.getElementById("ending-video"),
     skipVideoButton: document.getElementById("skip-video-button"),
+
+    endingIntroTitle: document.getElementById("ending-intro-title"),
+    endingIntroMessage: document.getElementById("ending-intro-message")
 };
 
 // Construct the scene manager.
@@ -90,7 +94,14 @@ const questionFlowScene =
         sceneManager,
         soundManager
 );
-const endingScene = new EndingScene(ui, soundManager, confettiManager);
+const endingScene =
+    new EndingScene(
+        ui,
+        soundManager,
+        confettiManager,
+        questionManager,
+        endingMessages
+);
 
 // Register scene.
 sceneManager.register("home", homeScene);

@@ -19,6 +19,7 @@ export class QuestionManager{
         this.currentIndex = 0;
         this.started = false;
         this.finished = false;
+        this.wrongCount = 0;
     }
 
     onCorrectAnswer(callback){
@@ -29,6 +30,7 @@ export class QuestionManager{
         this.currentIndex = 0;
         this.started = true;
         this.finished = false;
+        this.wrongCount = 0;
         this.render();
     }
 
@@ -63,6 +65,7 @@ export class QuestionManager{
         else{
             this.animationManager.wrong(button);
             this.soundManager.playWrong();
+            this.wrongCount++;
             setTimeout(()=>{
                 const random =
                     wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
@@ -85,5 +88,9 @@ export class QuestionManager{
         }
         this.render();
         return true;
+    }
+
+    getWrongCount(){
+        return this.wrongCount;
     }
 }

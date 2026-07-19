@@ -2,11 +2,19 @@ import { BaseScene } from "./BaseScene.js";
 
 export class EndingScene extends BaseScene {
 
-    constructor(ui ,soundManager, confettiManager) {
+    constructor(
+        ui,
+        soundManager,
+        confettiManager,
+        questionManager,
+        endingMessages
+    ) {
         super();
         this.ui = ui;
         this.soundManager = soundManager;
         this.confettiManager = confettiManager;
+        this.questionManager = questionManager;
+        this.endingMessages = endingMessages;
 
         this.introCard = ui.introCard;
         this.finalCard = ui.finalCard;
@@ -25,6 +33,7 @@ export class EndingScene extends BaseScene {
         this.showIntro();
         this.soundManager.playComplete();
         this.confettiManager.burst();
+        this.applyEndingMessage();
     }
 
     onLeave() {
@@ -68,6 +77,19 @@ export class EndingScene extends BaseScene {
 
         this.introCard.classList.add("hidden");
         this.finalCard.classList.remove("hidden");
+    }
+
+    applyEndingMessage() {
+        const wrongCount = this.questionManager.getWrongCount();
+
+        const matched = this.endingMessages.find(
+            (item) => wrongCount <= item.max
+        );
+
+        if (matched) {
+            this.ui.endingIntroTitle.textContent = matched.title;
+            this.ui.endingIntroMessage.textContent = matched.message;
+        }
     }
 
     restart() {

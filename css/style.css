@@ -16,6 +16,10 @@ body {
     background: linear-gradient(135deg, #B9E6FF, #EAF8FF);
 }
 
+h1, h2 {
+    font-family: "Zen Maru Gothic", "Noto Sans TC", sans-serif;
+}
+
 h1 {
     margin-top: 20px;
 }
@@ -352,7 +356,9 @@ p.fade-item {
 }
 
 #question-title {
+    font-family: "Zen Maru Gothic", "Noto Sans TC", sans-serif;
     font-size: 24px;
+    font-weight: 700;
     line-height: 1.5;
     margin-bottom: 28px;
 }
@@ -416,14 +422,22 @@ p.fade-item {
     padding: 30px;
     background: rgba(255, 255, 255, .9);
     border-radius: 30px;
-    text-align: center;
+    text-align: left;
     box-shadow: 0 20px 50px rgba(0, 0, 0, .12);
     animation: memoryEnter .5s ease;
 }
 
+.memory-card .primary-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 .memory-heart {
     font-size: 40px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 #memory-image {
@@ -446,12 +460,15 @@ p.fade-item {
 }
 
 #memory-title {
+    font-family: "Zen Maru Gothic", "Noto Sans TC", sans-serif;
     font-size: 26px;
+    font-weight: 700;
     color: #ff6b81;
     margin-bottom: 15px;
 }
 
 #memory-text {
+    font-family: "Klee One", "Noto Sans TC", sans-serif;
     font-size: 16px;
     color: #555;
     line-height: 1.8;
@@ -477,6 +494,20 @@ p.fade-item {
 .ending-intro,
 .ending-final {
     animation: memoryEnter .5s ease;
+}
+
+#ending-intro-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: clamp(18px, 5vw, 28px);
+}
+
+#ending-intro-message {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: clamp(14px, 3.5vw, 16px);
 }
 
 /* =========================
@@ -632,6 +663,11 @@ p.fade-item {
 }
 
 @media (max-width: 480px) {
+    .screen {
+        align-items: flex-start;
+        padding-top: 90px;
+    }
+    
     .card {
         padding: 32px 24px;
     }
