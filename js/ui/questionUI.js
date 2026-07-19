@@ -1,15 +1,18 @@
+import { typewrite } from "../utils/typewriter.js";
+
 export class QuestionUI {
 
-    constructor(ui){
+    constructor(ui, totalQuestions){
         this.questionTitle = ui.questionTitle;
         this.optionsContainer = ui.optionsContainer;
         this.questionNumber = ui.questionNumber;
+        this.totalQuestions = totalQuestions;
         this.card = document.querySelector(".question-card");
     }
 
     render(question, onAnswer){
-        this.questionNumber.textContent =`第 ${question.id} 個回憶問題`;
-        this.questionTitle.textContent = question.question;
+        this.questionNumber.textContent =`第 ${question.id} / ${this.totalQuestions} 個回憶問題`;
+        typewrite(this.questionTitle, question.question);
         this.optionsContainer.innerHTML = "";
         console.log("render question:", question);
         question.options.forEach(

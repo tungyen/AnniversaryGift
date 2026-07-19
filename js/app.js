@@ -70,7 +70,7 @@ const heartManager = new HeartManager(ui, questions.length);
 const animationManager = new AnimationManager();
 const soundManager = new SoundManager();
 const confettiManager = new ConfettiManager();
-const questionUI = new QuestionUI(ui);
+const questionUI = new QuestionUI(ui, questions.length);
 const questionManager =
     new QuestionManager(
         questionUI,

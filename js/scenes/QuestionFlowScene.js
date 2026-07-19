@@ -1,5 +1,6 @@
 import { BaseScene } from "./BaseScene.js";
 import { showLightbox } from "../managers/photoLightboxManager.js";
+import { typewrite } from "../utils/typewriter.js";
 
 export class QuestionFlowScene extends BaseScene {
     constructor(
@@ -39,13 +40,17 @@ export class QuestionFlowScene extends BaseScene {
         this.questionCard.classList.remove("hidden");
     }
 
-    showMemory(memory) {
+    async showMemory(memory) {
         this.ui.memoryImage.src = memory.image;
-        this.ui.memoryTitle.textContent = memory.title;
-        this.ui.memoryText.textContent = memory.text;
+        this.ui.memoryTitle.textContent = "";
+        this.ui.memoryText.textContent = "";
+        // this.ui.memoryTitle.textContent = memory.title;
+        // this.ui.memoryText.textContent = memory.text;
 
         this.questionCard.classList.add("hidden");
         this.memoryCard.classList.remove("hidden");
+        await typewrite(this.ui.memoryTitle, memory.title);
+        await typewrite(this.ui.memoryText, memory.text, 25);
     }
 
     memoryNext() {
