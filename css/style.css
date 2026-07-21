@@ -202,10 +202,8 @@ p.fade-item {
 .heart-progress-icon {
     position: relative;
     display: inline-block;
-    width: 48px;
-    height: 48px;
-    font-size: 48px;
-    line-height: 1;
+    width: 40px;
+    height: 40px;
     transition: transform .2s ease;
 }
 
@@ -213,16 +211,21 @@ p.fade-item {
 .heart-fill {
     position: absolute;
     inset: 0;
-    line-height: 1;
+    width: 100%;
+    height: 100%;
 }
 
-.heart-outline {
-    color: transparent;
-    -webkit-text-stroke: 1.5px #ff8fab;
+.heart-outline path {
+    fill: none;
+    stroke: #ff8fab;
+    stroke-width: 1.5;
+}
+
+.heart-fill path {
+    fill: #ff6b81;
 }
 
 .heart-fill {
-    color: #ff6b81;
     clip-path: inset(100% 0 0 0);
     transition: clip-path .7s cubic-bezier(.34, 1.2, .64, 1);
 }
@@ -686,9 +689,8 @@ p.fade-item {
     }
 
     .heart-progress-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 38px;
+        width: 32px;
+        height: 32px;
     }
 
     #heart-progress {
